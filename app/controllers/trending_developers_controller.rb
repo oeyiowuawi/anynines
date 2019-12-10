@@ -1,6 +1,7 @@
 class TrendingDevelopersController < ApplicationController
 
   def index
-    render json: { message: 'all developers' }, status: 200
+    developers = GithubService.get_trending_developers(language: 'ruby')
+    render json: developers, status: 200
   end
 end
