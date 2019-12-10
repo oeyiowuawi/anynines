@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ' get all the trending ruby developers on github' do
+describe ' get all the trending ruby developers on github', type: :request do
   it 'returns a status of 200' do
     get '/trending'
 

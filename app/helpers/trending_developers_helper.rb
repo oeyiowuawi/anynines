@@ -1,0 +1,2 @@
+module TrendingDevelopersHelper
+end
