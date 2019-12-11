@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import TrendingDeveloperGroup from './TrendingDeveloperGroup';
 import lodash from 'lodash';
+import Pagination from './Pagination';
 
 
 class TrendingDeveloperList extends Component {
 
   state = {
-    developers: []
+    developers: [],
+    perPage: 8,
+    currentPage: 1,
   }
 
 
@@ -19,22 +22,49 @@ class TrendingDeveloperList extends Component {
     this.fetchTrendingDeveloper();
   }
 
+  getIndexOfLastDev = () => {
+    return this.state.currentPage * this.state.perPage; 
+  }
+
+  getIndexOfFirstDev = () => {
+    return this.getIndexOfLastDev() - this.state.perPage;
+  }
+
+  getCurrentDevs = () => {
+    const firstIndex = this.getIndexOfFirstDev();
+    const lastIndex = this.getIndexOfLastDev();
+    return this.state.developers.slice(firstIndex, lastIndex)
+  }
+
+  paginate = (number, event) => {
+    event.preventDefault();
+    this.setState({
+      currentPage: number
+    })
+  }
+
 
   render() {
-    let groupedDeveloperList;
+    let groupedDeveloperList = [];
     let result = [];
+    let pagination = null
     if(this.state.developers.length > 0) {
-      groupedDeveloperList = lodash.chunk(this.state.developers, 4);
+      let currentDevs = this.getCurrentDevs();
+      groupedDeveloperList = lodash.chunk(currentDevs, 4);
       result = groupedDeveloperList.map((groupedList, index) => {
         return <TrendingDeveloperGroup group={groupedList} key={index} />
       })
+      pagination = <Pagination perPage={this.state.perPage}
+                               totalDevs={this.state.developers.length}
+                               paginate={this.paginate}
+                               currentPage={this.state.currentPage} />
     }
     return(
       <div className='container'>
        <h1> Trending Ruby Developer</h1>
        <hr />
        { result }
-       
+       { pagination }
       </div>
     )
   }
