@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+This simple app pulls the list of the trending ruby developers and displays it using react components.
 
 * Ruby version
+ ```
+ ruby 2.6.3p62
+ ```
 
-* System dependencies
+# System dependencies
+  You need to have node >=10 and rails 6 to run this application
 
-* Configuration
+# Configuration
+ * clone repo using `git clone git@github.com:oeyiowuawi/anynines.git` 
+ * run `bundle install`
+ * run `yarn install`
+ * run `rails s`
+ * visit `localhist:3000`
 
-* Database creation
 
-* Database initialization
+# How to run the test suite
+ * run `rspec spec`
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
