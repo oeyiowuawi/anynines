@@ -13,9 +13,16 @@ class TrendingDeveloperList extends Component {
   }
 
 
-  fetchTrendingDeveloper = async () => {
-    const response = await fetch("/trending").then(response => response.json())
-    .then(devs =>  this.setState({ developers: devs}));
+  fetchTrendingDeveloper =  () => {
+    const response = fetch("/trending").then(response => { 
+      if(response.ok) {
+        return response.json();
+      } else {
+        throw new Error(response.statusText);
+      }
+       })
+    .then(devs =>  this.setState({ developers: devs}))
+    .catch(error => console.log(error));
   }
 
   componentDidMount() {
